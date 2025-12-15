@@ -5,6 +5,7 @@ import img from "../../../../src/images/banner.jpg";
 import img2 from "../../../../src/images/hrimg.png";
 import img3 from "../../../../src/images/resume.png";
 // import bootstrap from 'bootstrap/dist/css/bootstrap.min.css';
+import Toast from "../../../toast";
 
 // import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -19,6 +20,7 @@ import "aos/dist/aos.css";
 
 import { useEffect } from "react";
 
+
 import Udichi from "../../../images/Testimonialimage/udichi-logo.png";
 import Teamlease from "../../../images/Testimonialimage/Teamlease.png";
 import st from "../../../images/Testimonialimage/st.png";
@@ -26,39 +28,16 @@ import sectorskill from "../../../images/Testimonialimage/sectorskill.png";
 import pratichi from "../../../images/Testimonialimage/pratichi.png";
 import asdp from "../../../images/Testimonialimage/asdp.png";
 import amity from "../../../images/Testimonialimage/amity2.png";
-// import demo from "../../../images/Testimonialimage/demo.png";
 
-// logo talent aceess
-// import imgage from "../../../../src/images/logo2.png";
-// import Footer from "../../Header/Footer/Footer";
-import Getdemo from "../../Reusablecomponents/Getdemo/Getdemo";
 import Testimonial from "../../Reusablecomponents/Testimonial/Testimonial";
+import DemoForm from "./demoHome/demohome";
 
 const Home = () => {
 
   const [isVisible, setIsVisible] = useState(false);
   const [animatedValues, setAnimatedValues] = useState([0, 0, 0]);
+  const [toast, setToast] = useState(null);
 
-  const [formData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
-    workEmail: "",
-  });
-
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("Form submitted:", formData);
-    // Handle form submission logic here
-    alert("Form submitted successfully!");
-  };
 
   useEffect(() => {
     AOS.init({
@@ -161,109 +140,24 @@ const Home = () => {
 
   const active = tabs.find((tab) => tab.id === activeTab);
 
+
+
+  
+
   return (
     <>
-      <div className="container-fluid main-section">
-        <div className="form-wrapper">
-          <div className="container">
-            <div className="row align-items-center g-4">
-              {/* Left Side - Form */}
-              <div className="col-lg-6">
-                <div className="form-section">
-                  <h2 className="text-center">
-                    The Smarter Way to Hire Top Talent
-                  </h2>
-                  <p className="text-center">
-                    Reliable skill tests for quality hiring decisions.
-                  </p>
+     {toast && (
+      <Toast 
+        message={toast.message} 
+        type={toast.type}
+        onClose={() => setToast(null)}
+      />
+    )}
+      
+<DemoForm/>
+    
+{/*  */}
 
-                  <form>
-                    <div className="row g-2">
-                      <div className="col-md-6">
-                        <input
-                          type="text"
-                          className="form-control1"
-                          placeholder="First Name *"
-                          required
-                        />
-                      </div>
-                      <div className="col-md-6">
-                        <input
-                          type="text"
-                          className="form-control1"
-                          placeholder="Last Name *"
-                          required
-                        />
-                      </div>
-
-                      <div className="col-12">
-                        <select className="form-select" required>
-                          <option value="">Company Size *</option>
-                          <option value="1-10">1-10</option>
-                          <option value="11-50">11-50</option>
-                          <option value="51-199">51-199</option>
-                          <option value="200-999">200-999</option>
-                          <option value="1000+">1000+</option>
-                        </select>
-                      </div>
-
-                      <div className="col-md-6">
-                        <select className="form-select" required>
-                          <option value="">Type *</option>
-                          <option value="company">Company/Organization</option>
-                          <option value="student">Test Taker/Student</option>
-                        </select>
-                      </div>
-
-                      <div className="col-md-6">
-                        <input
-                          type="email"
-                          className="form-control1"
-                          placeholder="Work Email *"
-                          required
-                        />
-                      </div>
-
-                      <div className="col-12">
-                        <div className="form-check d-flex align-items-center">
-                          <input
-                            type="checkbox"
-                            className="form-check-input"
-                            id="newsletter"
-                          />
-                          <label
-                            className="form-check-label ms-2"
-                            htmlFor="newsletter"
-                          >
-                            Subscribe to the Newsletter
-                          </label>
-                        </div>
-                      </div>
-
-                      <div className="col-12 butn">
-                        <button type="submit" className="btn1">
-                          Get a Demo
-                        </button>
-                      </div>
-                    </div>
-                  </form>
-                </div>
-              </div>
-
-              {/* Right Side - Image */}
-              <div className="col-lg-6">
-                <div className="image-section">
-                  <img
-                    src={img}
-                    alt="Form Illustration"
-                    className="img-fluid"
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
       <div className="slid-section">
         <div>
           <h2
@@ -613,97 +507,36 @@ const Home = () => {
         <Testimonial />
       </div>
       <div className="subscription-footer-wrapper">
-        <div>
-          <Getdemo />
-        </div>
+      
 
-        <div className="subscription-section">
-      <div className="subscription-container">
-        <div className="subscription-content">
-          {/* Left Side - Newsletter Signup */}
-          <div className="subscription-left">
-            <div className="subscription-header">
-              <div className="icon-wrapper">📧</div>
-              <h2>Subscribe for updates</h2>
-            </div>
-            <p>
-              Sign up for our newsletter to get industry-best practices,
-              platform updates, upcoming events, and more delivered straight
-              to your inbox.
-            </p>
-
-            <div className="subscription-form">
-              <div className="form-row">
-                <div className="form-field">
-                  <label className="form-label">First Name</label>
-                  <input
-                    type="text"
-                    name="firstName"
-                    className="form-control"
-                    placeholder="Enter your first name"
-                    value={formData.firstName}
-                    onChange={handleInputChange}
-                  />
-                </div>
-                <div className="form-field">
-                  <label className="form-label">Last Name</label>
-                  <input
-                    type="text"
-                    name="lastName"
-                    className="form-control"
-                    placeholder="Enter your last name"
-                    value={formData.lastName}
-                    onChange={handleInputChange}
-                  />
-                </div>
-              </div>
-              <div className="form-field">
-                <label className="form-label">Work Email</label>
-                <input
-                  type="email"
-                  name="workEmail"
-                  className="form-control"
-                  placeholder="Enter your work email"
-                  value={formData.workEmail}
-                  onChange={handleInputChange}
-                />
-              </div>
-              <button
-                type="button"
-                className="submit-btn"
-                onClick={handleSubmit}
-              >
-                Submit
-              </button>
-            </div>
-          </div>
-
-          {/* Right Side - Contact Info */}
-          <div className="subscription-right">
-            <div className="contact-info">
-              <div className="contact-header">
-                <div className="icon-wrapper">🎧</div>
-                <h3>Contact us</h3>
-              </div>
-              <p>
-                Interested in learning more? Contact our team to learn how
-                pre-employment assessments can improve your hiring.
-              </p>
-              <button
-                className="contact-btn"
-                onClick={() => alert("Contact form opened!")}
-              >
-                Get in touch
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+       
         {/* Footer Section */}
       </div>
     </>
   );
+};
+const inputStyle = {
+  width: '100%',
+  padding: '12px',
+  borderRadius: '8px',
+  border: '1px solid #ddd',
+  fontSize: '14px',
+  outline: 'none',
+  transition: 'border-color 0.3s',
+  fontFamily: "'Poppins', sans-serif"
+};
+
+const selectStyle = {
+  width: '100%',
+  padding: '12px',
+  borderRadius: '8px',
+  border: '1px solid #ddd',
+  fontSize: '14px',
+  outline: 'none',
+  backgroundColor: 'white',
+  cursor: 'pointer',
+  transition: 'border-color 0.3s',
+  fontFamily: "'Poppins', sans-serif"
 };
 
 export default Home;
